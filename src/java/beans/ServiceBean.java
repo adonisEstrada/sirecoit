@@ -32,9 +32,13 @@ import dto.RelModalidadRenit;
 import dto.Renit;
 import dto.Trabajo;
 import dto.Usuario;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.faces.context.FacesContext;
 import util.Correo;
 import util.CorreoJava;
 
@@ -42,7 +46,7 @@ import util.CorreoJava;
  *
  * @author Adonis
  */
-public class ServiceBean implements Serializable{
+public class ServiceBean implements Serializable {
 
     private ArmaDAO armaDAO = new ArmaDAOImpl();
     private FevetiDAO fevetiDAO = new FevetiDAOImpl();
@@ -199,5 +203,30 @@ public class ServiceBean implements Serializable{
 
     public List<Persona> getPersonWithUserCertified() {
         return personaDAO.getPersonWithUserCertified();
+    }
+
+    public List<Persona> getPersonas() {
+        return personaDAO.getPersonas();
+    }
+
+    public void validate() {
+        Usuario sessionUsuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+        if (sessionUsuario == null || !sessionUsuario.getTipoUsuario().equals(Usuario.USER_ADMIN)) {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/sirecoit");
+            } catch (IOException ex) {
+                Logger.getLogger(PersonaManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+    public void validateSupervisor(){
+        Usuario sessionUsuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+        if (sessionUsuario == null || !sessionUsuario.getTipoUsuario().equals(Usuario.USER_SUPERVISOR)) {
+            try {
+                FacesContext.getCurrentInstance().getExternalContext().redirect("/sirecoit");
+            } catch (IOException ex) {
+                Logger.getLogger(PersonaManagedBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }
 }

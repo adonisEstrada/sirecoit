@@ -8,6 +8,7 @@
     <h:head>
         <title>Correo SIRECOIT</title>
         <f:view renderKitId="PRIMEFACES_MOBILE"/>
+        <f:event type="preRenderView" listener="#{correoManagedBean.validate()}"/>
     </h:head>
     <h:body>
         <h:form id="form">

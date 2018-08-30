@@ -56,4 +56,8 @@ public class VerificarCorreoManagedBean implements Serializable {
     public String getLink() {
         return serviceBean.getConstantesByKey("link").getValue();
     }
+
+    public void validate() {
+        serviceBean.validate();
+    }
 }

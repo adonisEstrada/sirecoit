@@ -385,4 +385,8 @@ public class UsuarioManagedBean implements Serializable{
             persona = serviceBean.getPersonByUser(usuario);
         }
     }
+    public void validate(){
+        serviceBean.validate();
+    }
+    
 }

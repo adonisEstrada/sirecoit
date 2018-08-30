@@ -8,6 +8,7 @@
     <h:head>
         <title>Configuración SIRECOIT</title>
         <f:view renderKitId="PRIMEFACES_MOBILE"/>
+        <f:event type="preRenderView" listener="#{configuracionConstantesManagedBean.validate()}"/>
     </h:head>
 
     <h:body>

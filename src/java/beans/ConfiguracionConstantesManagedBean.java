@@ -52,4 +52,7 @@ public class ConfiguracionConstantesManagedBean implements Serializable{
     public void eliminarConstantes() {
         serviceBean.deleteConstantes(constantes);
     }
+    public void validate(){
+        serviceBean.validate();
+    }
 }

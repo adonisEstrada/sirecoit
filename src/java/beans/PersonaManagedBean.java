@@ -52,6 +52,8 @@ public class PersonaManagedBean implements Serializable {
 
     List<Persona> personasWithUserCertified = serviceBean.getPersonWithUserCertified();
 
+    List<Persona> personasParaBuscador = serviceBean.getPersonas();
+
     Usuario usuario = new Usuario();
 
     Persona personaSelected;
@@ -68,6 +70,14 @@ public class PersonaManagedBean implements Serializable {
     @PostConstruct
     public void init() {
         this.persona = new Persona();
+    }
+
+    public List<Persona> getPersonasParaBuscador() {
+        return personasParaBuscador;
+    }
+
+    public void setPersonasParaBuscador(List<Persona> personasParaBuscador) {
+        this.personasParaBuscador = personasParaBuscador;
     }
 
     public void construir() {
@@ -341,7 +351,6 @@ public class PersonaManagedBean implements Serializable {
 //            serviceBean.saveTrabajo(trabajo);
 //        }
 //    }
-
 //    public void agregarPersona() {
 //        Persona personaNueva = new Persona(0, 0, "", "", new Date(), "", "", "", "", "", "", "", "", "", "", null, null, null, null, null);
 //        personaNueva.setCorreoConfirmado(Boolean.TRUE);
@@ -372,7 +381,6 @@ public class PersonaManagedBean implements Serializable {
 //        serviceBean.saveUsuario(usuario);
 //        serviceBean.saveArma(arma);
 //    }
-
 //    public void agregarPersonaCertificado() {
 //        Persona personaNueva = new Persona(0, 0, "", "", new Date(), "", "", "", "", "", "", "", "", "", "", null, null, null, null, null);
 //        personaNueva.setCorreoConfirmado(Boolean.TRUE);
@@ -403,7 +411,6 @@ public class PersonaManagedBean implements Serializable {
 //        serviceBean.saveUsuario(usuario);
 //        serviceBean.saveArma(arma);
 //    }
-
     public void setSessionPersona(Persona persona) {
         FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put("persona", persona);
 
@@ -412,5 +419,11 @@ public class PersonaManagedBean implements Serializable {
         } catch (IOException ex) {
             Logger.getLogger(PersonaManagedBean.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    public void validate(){
+        serviceBean.validate();
+    }
+    public void validateSupervisor(){
+        
     }
 }

@@ -129,4 +129,18 @@ public class PersonaDAOImpl extends GenericDAOImpl<Persona> implements PersonaDA
         return resultado;
     }
 
+    @Override
+    public List<Persona> getPersonas() {
+        transaction = session.beginTransaction();
+        Query query = session.createQuery("select distinct persona from Persona persona "
+                + "inner join fetch persona.usuario usuario "
+                + "left join fetch persona.renit renit "
+                + "left join fetch renit.relModalidadRenits rel "
+                + "left join fetch rel.modalidad modalidad "
+                + "where usuario.activo=true and usuario.aceptado=true ");
+        List<Persona> resultado = query.list();
+        transaction.commit();
+        return resultado;
+    }
+
 }

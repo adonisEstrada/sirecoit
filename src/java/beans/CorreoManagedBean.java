@@ -103,4 +103,7 @@ public class CorreoManagedBean implements Serializable{
 //    public void addMessage() {
 //        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Enviados correctamente."));
 //    }
+    public void validate(){
+        serviceBean.validate();
+    }
 }

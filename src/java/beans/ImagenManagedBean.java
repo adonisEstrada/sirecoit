@@ -74,4 +74,7 @@ public class ImagenManagedBean implements Serializable{
         }
         return "Usuario no esncontrado.";
     }
+    public void validate(){
+        serviceBean.validate();
+    }
 }

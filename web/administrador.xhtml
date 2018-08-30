@@ -9,7 +9,7 @@
     <h:head>
         <title>Administrador SIRECOIT</title>
         <f:event type="preRenderView" listener="#{personaManagedBean.construir()}"/>
-
+        <f:event type="preRenderView" listener="#{personaManagedBean.validate()}"/>
     </h:head>
     <h:body>
         <style type="text/css">

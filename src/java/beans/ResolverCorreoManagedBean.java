@@ -76,5 +76,8 @@ public class ResolverCorreoManagedBean implements Serializable{
                 + serviceBean.getConstantesByKey("link").getValue() + "/faces/verify.xhtml?key=" + persona.getCorreoConfirmacionId()));
         serviceBean.savePersona(persona);
     }
+    public void validate(){
+        serviceBean.validate();
+    }
 
 }

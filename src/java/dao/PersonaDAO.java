@@ -28,4 +28,6 @@ public interface PersonaDAO extends GenericDAO<Persona> {
     public List<Persona> getPersonWithUserAndEmailVerified();
 
     public List<Persona> getPersonWithUserCertified();
+    
+    public List<Persona> getPersonas();
 }

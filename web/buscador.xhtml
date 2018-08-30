@@ -7,11 +7,12 @@
     <h:head>
         <title>Buscador SIRECOIT</title>
         <f:view renderKitId="HTML_BASIC"/>
+        <f:event type="preRenderView" listener="#{personaManagedBean.validate()}"/>
     </h:head>
     <h:body>
         <h:form id="form">
             <p:panel header="Buscador">
-                <p:dataTable var="persona" value="#{personaManagedBean.personasWithUser}" 
+                <p:dataTable var="persona" value="#{personaManagedBean.personasParaBuscador}" 
                              scrollable="true" styleClass="tablaPersonasCeriticadas" widgetVar="personaTabla"
                              filteredValue="#{personaManagedBean.personaFiltradas}">
 
