@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pm="http://primefaces.org/mobile"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <f:view renderKitId="PRIMEFACES_MOBILE"/>
+    </h:head>
+    <h:body>
+        <style type="text/css">
+            body {  
+                background:url('resource/fondo_sirecoit2.png');                   
+            }
+        </style>
+        <style type="text/css">
+            .ui-page {
+                background: transparent url(resource/fondo_sirecoit2.png);
+            }
+        </style>
+        <h:form id="form">
+            <pm:page>
+                <pm:content style="background-color: transparent">
+                    <p:panel header="Informacion sobre SIRECOIT" style="background-color: transparent">
+                        <p:outputLabel value="El Sistema de Registro y Control de Instructores de Tiro (SIRECOIT) está desarrollado en software libre, multiplataforma, 100% original, codificado en Java Enterprise Edition, con uso de PrimeFaces, siendo esta la tecnología más avanzada y versátil en el desarrollo de aplicaciones web, además de ser completamente escalable para el mejoramiento de la bondades de la aplicación, sin limitación alguna en tamaño y funcionalidad."/>
+                        <p:outputLabel value="El SIRECOIT es totalmente Mobile, es decir, fue diseñado para el uso a través de celulares inteligentes, con acceso a internet. En su primera versión tiene características Responsive,  que permite su adaptación al dispositivo con el cual se conecte, sea celular, laptop, tableta o PC. Por su parte, la base de datos está administrada con PostgresSQL y gestionada con HIBERNATE, y se utilizó la arquitectura de diseño MVC con patrones de diseño DAO, Beans, Service, SessionFactory y Pojo's, entre otros."/>
+                        <p:outputLabel value="El SIRECOIT está alojado en internet a través de un VPS contratado, en un servidor GlassFish Server Open Source, con capacidad de almacenamiento ilimitado, a través de un espacio asignado en el hosting del grupo ATECA, específicamente en la división de Aplicaciones y Tecnologías de Avanzada. De igual manera, se contrató un sitio web para el hospedaje del respaldo de la data y múltiples funciones que serán desarrolladas en versiones posteriores."/>
+                        <p:outputLabel value="Por tanto, a través de ésta primera versión 1.1 del SIRECOIT, los Instructores de Tiro dispondrán de una herramienta tecnológica para el registro individual de sus datos a través de internet, lo cual pueden realizar en tiempo real, siendo monitoreado, asignado y monitoreado por la máxima autoridad del RENIT y de la DAEX, permitiendo el manejo eficiente de la base de datos de Instructores certificados o aspirantes a certificarse por el ente rector en la materia, mediante la transmisión de información de interés particular o colectiva, haciendo uso de las Tecnologías de la Información y la Comunicación (TIC), apalancando el desarrollo, avance e innovación, gracias a los aportes realizados por este gremio."/>
+                    </p:panel>
+                </pm:content>
+            </pm:page>
+        </h:form>
+    </h:body>
+</html>
+

@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pm="http://primefaces.org/mobile"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Correo SIRECOIT</title>
+        <f:view renderKitId="PRIMEFACES_MOBILE"/>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <h3>Correos SIRECOIT</h3>
+            <pm:page id="correo" title="Correo SIRECOIT">
+                <pm:content style="background-color: transparent">
+                    <pm:field>
+                        <p:accordionPanel>
+
+                            <p:tab title="Enviar a todos">
+
+                                <p:outputLabel for="asunto2" value="Asunto:"/>
+                                <p:inputText id="asunto2" value="#{correoManagedBean.correo.asunto}"/>
+
+                                <p:outputLabel for="cuerpo2" value="Contenido"/>
+                                <p:inputTextarea id="cuerpo2" value="#{correoManagedBean.correo.cuerpo}"/>
+
+                                <p:commandButton value="Enviar" actionListener="#{correoManagedBean.enviarATodos()}" 
+                                                 action="#{usuarioManagedBean.volver()}"/>
+
+                            </p:tab>
+
+                        </p:accordionPanel>
+
+                    </pm:field>
+
+                </pm:content>
+
+            </pm:page>
+
+        </h:form>
+    </h:body>
+
+</html>
+

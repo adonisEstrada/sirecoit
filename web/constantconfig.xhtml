@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pm="http://primefaces.org/mobile"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Configuración SIRECOIT</title>
+        <f:view renderKitId="PRIMEFACES_MOBILE"/>
+    </h:head>
+
+    <h:body>
+
+        <h:form id="form">
+
+            <p:panel header="Configuracion de SIRECOIT">
+
+                <pm:field>
+
+                    <p:outputLabel for="key" value="Key"/>
+                    <p:inputText id="key" value="#{configuracionConstantesManagedBean.constantes.key}"/>
+
+                    <p:outputLabel for="value" value="Value"/>
+                    <p:inputText id="value" value="#{configuracionConstantesManagedBean.constantes.value}"/>
+
+                    <p:dataTable id="tabla" var="constantes" value="#{configuracionConstantesManagedBean.listaConstantes}" 
+                                 styleClass="tabla">
+                        <p:column headerText="key">
+                            <h:outputText value="#{constantes.key}" />
+                        </p:column>
+                        <p:column headerText="value">
+                            <h:outputText value="#{constantes.value}" />
+                        </p:column>
+                        <p:column style="width:32px;text-align: center">
+                            <p:commandButton id="select" value="select" icon="ui-icon-close" title="View" update="@(.key .value)">
+                                <f:setPropertyActionListener value="#{constantes}" target="#{configuracionConstantesManagedBean.constantes}" />
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+
+                    <p:commandButton value="Aplicar" actionListener="#{configuracionConstantesManagedBean.guardarConstantes()}" 
+                                     update="@(tabla)" ajax="false"/>
+                    <p:commandButton value="Eliminar" actionListener="#{configuracionConstantesManagedBean.eliminarConstantes()}"
+                                     update="@(.key .value)" ajax="false"/>
+                    <p:commandButton value="Volver" action="administrador"
+                                     ajax="false"/>
+                </pm:field>
+
+            </p:panel>
+
+        </h:form>
+
+    </h:body>
+
+</html>
+

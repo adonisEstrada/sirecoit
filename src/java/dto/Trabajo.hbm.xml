@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/07/2018 06:44:35 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="dto.Trabajo" table="trabajo" schema="public">
+        <id name="trabajoId" type="int">
+            <column name="trabajo_id" />
+            <generator class="foreign">
+                <param name="property">persona</param>
+            </generator>
+        </id>
+        <one-to-one name="persona" class="dto.Persona" constrained="true"></one-to-one>
+        <property name="empresa" type="string">
+            <column name="empresa" />
+        </property>
+        <property name="lugarEmpresa" type="string">
+            <column name="lugar_empresa" />
+        </property>
+        <property name="parroquiaTrabajo" type="string">
+            <column name="parroquia_trabajo" />
+        </property>
+        <property name="municipioTrabajo" type="string">
+            <column name="municipio_trabajo" />
+        </property>
+        <property name="estadoTrabajo" type="string">
+            <column name="estado_trabajo" />
+        </property>
+        <property name="cargo" type="string">
+            <column name="cargo" />
+        </property>
+        <property name="profesion" type="string">
+            <column name="profesion" />
+        </property>
+        <property name="gradoInstruccion" type="string">
+            <column name="grado_instruccion" />
+        </property>
+    </class>
+</hibernate-mapping>

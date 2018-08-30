@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/07/2018 06:44:35 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="dto.Feveti" table="feveti" schema="public">
+        <id name="fevetiId" type="int">
+            <column name="feveti_id" />
+            <generator class="foreign">
+                <param name="property">persona</param>
+            </generator>
+        </id>
+        <one-to-one name="persona" class="dto.Persona" constrained="true"></one-to-one>
+        <property name="miembro" type="java.lang.Boolean">
+            <column name="miembro" />
+        </property>
+        <property name="asociacion" type="string">
+            <column name="asociacion" />
+        </property>
+        <property name="fechaIngreso" type="timestamp">
+            <column name="fecha_ingreso" length="35" />
+        </property>
+    </class>
+</hibernate-mapping>

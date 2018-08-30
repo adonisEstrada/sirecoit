@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<faces-config version="2.2"
+              xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+    <navigation-rule>
+        <from-view-id>/index.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>registry</from-outcome>
+            <to-view-id>/registry.xhtml</to-view-id>
+            <from-outcome>administrador</from-outcome>
+            <to-view-id>/administrador.xhtml</to-view-id>
+            <from-outcome>notUser</from-outcome>
+            <to-view-id>/notUser.xhtml</to-view-id>
+            <from-outcome>usuario</from-outcome>
+            <to-view-id>/usuario.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+<!--    <application>
+        <navigation-handler>
+            org.primefaces.mobile.application.MobileNavigationHandler
+        </navigation-handler>
+    </application>-->
+<!--    <application>
+        <default-render-kit-id>PRIMEFACES_MOBILE</default-render-kit-id>
+    </application>-->
+</faces-config>

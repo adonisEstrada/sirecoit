@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/07/2018 06:44:35 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="dto.Persona" table="persona" schema="public">
+        <id name="personaId" type="int">
+            <column name="persona_id" />
+            <generator class="increment"></generator>
+        </id>
+        <property name="cedula" type="java.lang.Integer">
+            <column name="cedula" />
+        </property>
+        <property name="nombre" type="string">
+            <column name="nombre" />
+        </property>
+        <property name="rif" type="string">
+            <column name="rif" length="127" />
+        </property>
+        <property name="fechaNacimiento" type="timestamp">
+            <column name="fecha_nacimiento" length="35" />
+        </property>
+        <property name="lugarNacimiento" type="string">
+            <column name="lugar_nacimiento" />
+        </property>
+        <property name="nacionalidad" type="string">
+            <column name="nacionalidad" />
+        </property>
+        <property name="direccionHabitacion" type="string">
+            <column name="direccion_habitacion" />
+        </property>
+        <property name="parroquia" type="string">
+            <column name="parroquia" />
+        </property>
+        <property name="municipio" type="string">
+            <column name="municipio" />
+        </property>
+        <property name="estado" type="string">
+            <column name="estado" />
+        </property>
+        <property name="telefonoCantv" type="string">
+            <column name="telefono_cantv" length="127" />
+        </property>
+        <property name="telefonoPersonal" type="string">
+            <column name="telefono_personal" length="127" />
+        </property>
+        <property name="telefonoFamiliar" type="string">
+            <column name="telefono_familiar" length="127" />
+        </property>
+        <property name="correo" type="string">
+            <column name="correo" />
+        </property>
+        <property name="correoConfirmacionId" type="string">
+            <column name="correo_confirmacion_id" />
+        </property>
+        <property name="correoConfirmado" type="java.lang.Boolean">
+            <column name="correo_confirmado" />
+        </property>
+<!--        <property name="imagen" type="binary">
+            <column name="imagen" />
+        </property>-->
+        <one-to-one name="trabajo" class="dto.Trabajo"></one-to-one>
+        <one-to-one name="arma" class="dto.Arma"></one-to-one>
+        <one-to-one name="feveti" class="dto.Feveti"></one-to-one>
+        <one-to-one name="renit" class="dto.Renit"></one-to-one>
+        <one-to-one name="usuario" class="dto.Usuario"></one-to-one>
+    </class>
+</hibernate-mapping>

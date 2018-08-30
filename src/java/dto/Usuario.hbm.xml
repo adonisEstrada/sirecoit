@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/07/2018 06:44:35 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="dto.Usuario" table="usuario" schema="public">
+        <id name="usuarioId" type="int">
+            <column name="usuario_id" />
+            <generator class="foreign">
+                <param name="property">persona</param>
+            </generator>
+        </id>
+        <one-to-one name="persona" class="dto.Persona" constrained="true"></one-to-one>
+        <property name="nombre" type="string">
+            <column name="nombre" />
+        </property>
+        <property name="clave" type="string">
+            <column name="clave" />
+        </property>
+        <property name="tipoUsuario" type="string">
+            <column name="tipo_usuario" length="127" />
+        </property>
+        <property name="activo" type="java.lang.Boolean">
+            <column name="activo" />
+        </property>
+        <property name="aceptado" type="java.lang.Boolean">
+            <column name="aceptado" />
+        </property>
+        <property name="fechaCreado" type="timestamp">
+            <column name="fecha_creado" length="35" />
+        </property>
+    </class>
+</hibernate-mapping>

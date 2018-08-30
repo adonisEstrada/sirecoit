@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pm="http://primefaces.org/mobile"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <f:view renderKitId="PRIMEFACES_MOBILE"/>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <pm:page>
+
+                <p:panel header="Verificar Cédula" rendered="#{!resolverCorreoManagedBean.isUsuario}">
+                    <p:outputLabel value="Coloque su cedula"/>
+                    <p:inputNumber value="#{resolverCorreoManagedBean.cedula}" decimalPlaces="0"/>
+                    <p:commandButton value="Verificar" actionListener="#{resolverCorreoManagedBean.verificar()}" 
+                                     ajax="false" update="@(.content)"/>
+                </p:panel>
+
+                <pm:content id="content" styleClass="content" rendered="#{resolverCorreoManagedBean.isPersona}">
+                    <p:outputLabel value="#{resolverCorreoManagedBean.persona.nombre}"/>
+                    <p:outputLabel value="Este es el correo que introdujo"/>
+
+                    <p:inputText value="#{resolverCorreoManagedBean.persona.correo}"/>
+
+                    <p:commandButton value="Reenviar" actionListener="#{resolverCorreoManagedBean.reenviarCorreo()}" 
+                                     action="index" ajax="false"/>
+                </pm:content>
+
+            </pm:page>
+        </h:form>
+    </h:body>
+</html>
+

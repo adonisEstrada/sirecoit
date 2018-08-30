@@ -1,0 +1,139 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pm="http://primefaces.org/mobile">
+    <h:head>
+        <title>Supervisor SIRECOIT</title>
+        <f:view renderKitId="PRIMEFACES_MOBILE"/>
+    </h:head>
+    <h:body>
+        <style type="text/css">
+            body {  
+                background:url('resource/fondo_sirecoit2.png');                   
+            }
+        </style>
+        <style type="text/css">
+            .ui-page {
+                background: transparent url(resource/fondo_sirecoit2.png);
+            }
+        </style>
+        <h:form id="form">
+
+
+            <pm:page id="admin">
+
+                <pm:content style="background-color: transparent">
+                    <p:outputLabel value="Supervisor"/>
+
+                    <p:outputLabel value="Listado de usuarios"/>
+
+                    <p:dataTable id="basic" var="persona" value="#{personaManagedBean.personasWithUser}" 
+                                 scrollable="true" editable="false">
+
+                        <p:column headerText="Nombres y Apellidos" width="300">
+                            <p:outputLabel value="#{persona.nombre}" />
+                        </p:column>
+
+                        <p:column headerText="Cédula" width="100">
+                            <p:outputLabel value="#{persona.cedula}" />
+                        </p:column>
+
+                        <p:column headerText="Correo" width="300">
+                            <p:outputLabel value="#{persona.correo}" />
+                        </p:column>
+
+                        <p:column headerText="Edad" width="50">
+                            <p:outputLabel value="#{personaManagedBean.getEdad(persona)}"/>
+                        </p:column>
+
+                        <p:column headerText="Teléfono" width="200">
+                            <p:outputLabel value="#{personaManagedBean.getTelefono(persona)}"/>
+                        </p:column>
+
+                        <p:column headerText="Estado de Residencia" width="100">
+                            <p:outputLabel value="#{persona.estado}"/>
+                        </p:column>
+
+                        <p:column headerText="RENIT" width="50">
+                            <p:commandButton update=":form:admin:certificados" oncomplete="PF('dlg').show()" icon="ui-icon-search" title="View">
+                                <f:setPropertyActionListener value="#{persona}" target="#{personaManagedBean.personaSelected}" />
+                            </p:commandButton>
+                        </p:column>
+
+                        <p:column headerText="Inscrito en RENIT" width="100">
+                            <p:selectBooleanCheckbox value="#{persona.renit.registrado}" />
+                        </p:column>
+
+                        <p:column headerText="Realizado curso" width="100">
+                            <p:selectBooleanCheckbox value="#{persona.renit.realizoCurso}" />
+                        </p:column>
+
+
+                        <p:column headerText="Modalidades" width="300">
+                            <p:outputLabel value="#{personaManagedBean.descripcionCertificados(persona)}"/>
+                        </p:column>
+
+                        <p:column headerText="Confirmación Correo" width="150">
+                            <p:selectBooleanCheckbox value="#{persona.correoConfirmado}" />
+                        </p:column>
+
+                    </p:dataTable>
+
+                </pm:content>
+
+                <h3>Usuarios registrado esperando aprobación</h3>
+
+                <p:dataTable id="tabla" var="persona" value="#{personaManagedBean.personaWithoutUser}" 
+                             styleClass="tabla" >
+                    <p:column headerText="nombre">
+                        <p:outputLabel value="#{persona.nombre}" />
+                    </p:column>
+                    <p:column headerText="cedula">
+                        <p:outputLabel value="#{persona.cedula}" />
+                    </p:column>
+                    <p:column headerText="correo">
+                        <p:outputLabel value="#{persona.correo}" />
+                    </p:column>
+                    <p:column headerText="Confirmación Correo" width="150">
+                        <p:selectBooleanCheckbox value="#{persona.correoConfirmado}" />
+                    </p:column>
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton id="buttonCheck" icon="ui-icon-check" 
+                                         actionListener="#{personaManagedBean.aceptarUsuario(persona)}"
+                                         update="@(.tabla .basic)"
+                                         ajax="false"/>
+                    </p:column>
+                    <p:column style="width:32px;text-align: center">
+                        <p:commandButton id="buttonClose" icon="ui-icon-close" 
+                                         actionListener="#{personaManagedBean.eliminarUsuario(persona)}"
+                                         update=":form:tabla"
+                                         ajax="false"/>
+                    </p:column>
+                </p:dataTable>
+                <p:commandButton value="Actualizar Datos" action="/usuario?faces-redirect=true"/>
+                <br/>
+                <p:commandButton value="Correos" action="correo"/>
+                <br/>
+                <p:commandButton value="Cerrar sesion" action="/index?faces-redirect=true" 
+                                 actionListener="#{personaManagedBean.cerrarSecion()}"/>
+
+
+                <p:dialog id="dialog" header="Certificados" modal="true" resizable="false" showEffect="fade" widgetVar="dlg">
+                    <p:dataTable id="certificados" var="rel" value="#{personaManagedBean.relModalidadRenits}" 
+                                 styleClass="tabla">
+                        <p:column headerText="Código">
+                            <p:outputLabel value="#{rel.codigo}"/>
+                        </p:column>
+                        <p:column headerText="Modalidad">
+                            <p:outputLabel value="#{rel.modalidad.descripcion}"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:dialog>
+            </pm:page>
+        </h:form>
+    </h:body>
+</html>
+

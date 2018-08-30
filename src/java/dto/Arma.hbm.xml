@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/07/2018 06:44:35 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="dto.Arma" table="arma" schema="public">
+        <id name="armaId" type="int">
+            <column name="arma_id" />
+            <generator class="foreign">
+                <param name="property">persona</param>
+            </generator>
+        </id>
+        <one-to-one name="persona" class="dto.Persona" constrained="true"></one-to-one>
+        <property name="tipoArma" type="string">
+            <column name="tipo_arma" />
+        </property>
+        <property name="marca" type="string">
+            <column name="marca" />
+        </property>
+        <property name="modelo" type="string">
+            <column name="modelo" />
+        </property>
+        <property name="calibre" type="string">
+            <column name="calibre" />
+        </property>
+        <property name="serial" type="string">
+            <column name="serial" />
+        </property>
+        <property name="paisFabricacion" type="string">
+            <column name="pais_fabricacion" />
+        </property>
+        <property name="capacidadCartucho" type="java.lang.Integer">
+            <column name="capacidad_cartucho" />
+        </property>
+        <property name="numeroFactura" type="string">
+            <column name="numero_factura" />
+        </property>
+        <property name="fechaFactura" type="timestamp">
+            <column name="fecha_factura" length="35" />
+        </property>
+        <property name="tipoPorte" type="string">
+            <column name="tipo_porte" />
+        </property>
+        <property name="codigoDaexNumeroPorte" type="string">
+            <column name="codigo_daex_numero_porte" />
+        </property>
+        <property name="numeroSobre" type="string">
+            <column name="numero_sobre" />
+        </property>
+        <property name="fechaVencimiento" type="timestamp">
+            <column name="fecha_vencimiento" length="35" />
+        </property>
+        <property name="porteVigente" type="java.lang.Boolean">
+            <column name="porte_vigente" />
+        </property>
+    </class>
+</hibernate-mapping>

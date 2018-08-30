@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Buscador SIRECOIT</title>
+        <f:view renderKitId="HTML_BASIC"/>
+    </h:head>
+    <h:body>
+        <h:form id="form">
+            <p:panel header="Buscador">
+                <p:dataTable var="persona" value="#{personaManagedBean.personasWithUser}" 
+                             scrollable="true" styleClass="tablaPersonasCeriticadas" widgetVar="personaTabla"
+                             filteredValue="#{personaManagedBean.personaFiltradas}">
+
+                    <p:column style="width:32px;text-align: center" width="100">
+                        <p:commandButton id="ver" value="Ver" icon="ui-icon-find" 
+                                         title="View" actionListener="#{personaManagedBean.setSessionPersona(persona)}"/>
+                    </p:column>
+
+                    <p:column headerText="Nombres y Apellidos" width="300" 
+                              filterBy="#{persona.nombre}" 
+                              filterMatchMode="contains">
+                        <h:outputText value="#{persona.nombre}" />
+                    </p:column>
+
+                    <p:column headerText="Cédula" width="100" 
+                              filterBy="#{persona.cedula}"
+                              filterMatchMode="contains">
+                        <p:outputLabel value="#{persona.cedula}" />
+                    </p:column>
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>
+

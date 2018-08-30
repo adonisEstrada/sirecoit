@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 29/07/2018 06:44:35 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="dto.Modalidad" table="modalidad" schema="public">
+        <id name="modalidadId" type="int">
+            <column name="modalidad_id" />
+            <generator class="assigned"></generator>
+        </id>
+        <property name="descripcion" type="string">
+            <column name="descripcion" />
+        </property>
+        <set name="relModalidadRenits" table="rel_modalidad_renit" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="modalidad_id" />
+            </key>
+            <one-to-many class="dto.RelModalidadRenit" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,294 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pm="http://primefaces.org/mobile"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Administrador SIRECOIT</title>
+        <f:event type="preRenderView" listener="#{personaManagedBean.construir()}"/>
+
+    </h:head>
+    <h:body>
+        <style type="text/css">
+            body {  
+                background:url('resource/fondo_sirecoit2.png');                   
+            }
+        </style>
+        <style type="text/css">
+            .ui-page {
+                background: transparent url(resource/fondo_sirecoit2.png);
+            }
+        </style>
+        <h:form id="form">
+            <pm:page id="admin">
+
+
+                <p:panel header="Administrador">
+
+                    <p:accordionPanel>
+
+                        <p:tab title="Listado de usuarios certificados">
+                            <pm:content style="background-color: transparent">
+
+                                <p:dataTable var="persona" value="#{personaManagedBean.personasWithUserCertified}" 
+                                             scrollable="true" styleClass="tablaPersonasCeriticadas" widgetVar="personaTabla"
+                                             filteredValue="#{personaManagedBean.personaFiltradas}">
+
+                                    <p:column style="width:32px;text-align: center" width="100">
+                                        <p:commandButton id="ver" value="Ver" icon="ui-icon-find" title="View" actionListener="#{personaManagedBean.setSessionPersona(persona)}"/>
+                                    </p:column>
+
+                                    <p:column headerText="Nombres y Apellidos" width="300" 
+                                              filterBy="#{persona.nombre}" 
+                                              filterMatchMode="contains">
+                                        <h:outputText value="#{persona.nombre}" />
+                                    </p:column>
+
+                                    <p:column headerText="Cédula" width="100" 
+                                              filterBy="#{persona.cedula}"
+                                              filterMatchMode="contains">
+                                        <p:outputLabel value="#{persona.cedula}" />
+                                    </p:column>
+
+                                    <p:column headerText="Usuario" width="200" >
+                                        <p:outputLabel value="#{persona.usuario.nombre}" />
+                                    </p:column>
+
+                                    <p:column headerText="Clave" width="100" >
+                                        <p:outputLabel value="#{persona.usuario.clave}" />
+                                    </p:column>
+
+                                    <p:column headerText="Correo" width="300" filterMatchMode="contains">
+                                        <p:outputLabel value="#{persona.correo}" />
+                                    </p:column>
+
+                                    <p:column headerText="Tipo de Usuario" width="300" filterMatchMode="contains">
+                                        <p:selectOneMenu id="tipoUsuario" value="#{persona.usuario.tipoUsuario}">
+                                            <f:selectItem itemLabel="Administrador" itemValue="Administrador" />
+                                            <f:selectItem itemLabel="Normal" itemValue="Normal" />
+                                            <f:selectItem itemLabel="Supervisor" itemValue="Supervisor" />
+                                        </p:selectOneMenu>
+                                    </p:column>
+
+                                    <p:column headerText="Edad" width="50">
+                                        <p:outputLabel value="#{personaManagedBean.getEdad(persona)}"/>
+                                    </p:column>
+
+                                    <p:column headerText="Telefono Personal" width="200">
+                                        <p:outputLabel value="#{persona.telefonoPersonal}"/>
+                                    </p:column>
+                                    <p:column headerText="Telefono CANTV" width="200">
+                                        <p:outputLabel value="#{persona.telefonoCantv}"/>
+                                    </p:column>
+                                    <p:column headerText="Telefono Familiar" width="200">
+                                        <p:outputLabel value="#{persona.telefonoFamiliar}"/>
+                                    </p:column>
+
+                                    <p:column headerText="Estado de residencia" width="100">
+                                        <p:outputLabel value="#{persona.estado}"/>
+                                    </p:column>
+
+                                    <p:column headerText="RENIT" width="50">
+                                        <p:commandButton update=":form:admin:certificados" oncomplete="PF('dlg').show()" icon="ui-icon-search" title="View">
+                                            <f:setPropertyActionListener value="#{persona}" target="#{personaManagedBean.personaSelected}" />
+                                        </p:commandButton>
+                                    </p:column>
+
+                                    <p:column headerText="Inscrito en RENIT" width="100">
+                                        <p:selectBooleanCheckbox value="#{persona.renit.registrado}" />
+                                    </p:column>
+
+                                    <p:column headerText="Realizado curso" width="100">
+                                        <p:selectBooleanCheckbox value="#{persona.renit.realizoCurso}" />
+                                    </p:column>
+
+
+                                    <p:column headerText="Modalidades" width="300">
+                                        <p:outputLabel value="#{personaManagedBean.descripcionCertificados(persona)}"/>
+                                    </p:column>
+
+                                    <p:column headerText="Correo Confirmado" width="150">
+                                        <p:inputSwitch value="#{persona.correoConfirmado}"/>
+                                    </p:column>
+
+                                    <p:column style="width:32px;text-align: center" width="100">
+                                        <p:commandButton id="eliminar" value="Eliminar" oncomplete="PF('dialogConfirm').show()" icon="ui-icon-close" title="View">
+                                            <f:setPropertyActionListener value="#{persona}" target="#{personaManagedBean.personaAEliminar}" />
+                                        </p:commandButton>
+                                    </p:column>
+                                </p:dataTable>
+                            </pm:content>        
+                        </p:tab>
+
+
+                        <p:tab title="Listado de usuarios no certificados">
+                            <pm:content style="background-color: transparent">
+
+                                <p:dataTable var="persona" value="#{personaManagedBean.personasWithUser}" 
+                                             scrollable="true" editable="true" editMode="cell" styleClass="tablaPersonasNoCertificadas">
+                                    
+                                    <p:column style="width:32px;text-align: center" width="100">
+                                        <p:commandButton id="ver" value="Ver" icon="ui-icon-find" title="View" actionListener="#{personaManagedBean.setSessionPersona(persona)}"/>
+                                    </p:column>
+                                    
+                                    <p:column headerText="Nombres y Apellidos" width="300" 
+                                              filterBy="#{persona.nombre}" 
+                                              filterMatchMode="contains">
+                                        <p:outputLabel value="#{persona.nombre}" />
+                                    </p:column>
+
+                                    <p:column headerText="Cédula" width="100" 
+                                              filterBy="#{persona.cedula}"
+                                              filterMatchMode="contains">
+                                        <p:outputLabel value="#{persona.cedula}" />
+                                    </p:column>
+
+                                    <p:column headerText="Usuario" width="200" filterMatchMode="contains">
+                                        <p:outputLabel value="#{persona.usuario.nombre}" />
+                                    </p:column>
+
+                                    <p:column headerText="Clave" width="100" >
+                                        <p:outputLabel value="#{persona.usuario.clave}" />
+                                    </p:column>
+
+                                    <p:column headerText="Correo" width="300" filterMatchMode="contains">
+                                        <p:outputLabel value="#{persona.correo}" />
+                                    </p:column>
+
+                                    <p:column headerText="Tipo de Usuario" width="300" filterMatchMode="contains">
+                                        <p:selectOneMenu id="tipoUsuario" value="#{persona.usuario.tipoUsuario}">
+                                            <f:selectItem itemLabel="Administrador" itemValue="Administrador" />
+                                            <f:selectItem itemLabel="Normal" itemValue="Normal" />
+                                            <f:selectItem itemLabel="Supervisor" itemValue="Supervisor" />
+                                        </p:selectOneMenu>
+                                    </p:column>
+
+                                    <p:column headerText="Edad" width="50">
+                                        <p:outputLabel value="#{personaManagedBean.getEdad(persona)}"/>
+                                    </p:column>
+
+                                    <p:column headerText="Telefono Personal" width="200">
+                                        <p:outputLabel value="#{persona.telefonoPersonal}"/>
+                                    </p:column>
+                                    <p:column headerText="Telefono CANTV" width="200">
+                                        <p:outputLabel value="#{persona.telefonoCantv}"/>
+                                    </p:column>
+                                    <p:column headerText="Telefono Familiar" width="200">
+                                        <p:outputLabel value="#{persona.telefonoFamiliar}"/>
+                                    </p:column>
+
+                                    <p:column headerText="Estado de residencia" width="100">
+                                        <p:outputLabel value="#{persona.estado}"/>
+                                    </p:column>
+
+                                    <p:column headerText="RENIT" width="50">
+                                        <p:commandButton update=":form:admin:certificados" oncomplete="PF('dlg').show()" icon="ui-icon-search" title="View">
+                                            <f:setPropertyActionListener value="#{persona}" target="#{personaManagedBean.personaSelected}" />
+                                        </p:commandButton>
+                                    </p:column>
+
+                                    <p:column headerText="Inscrito en RENIT" width="100">
+                                        <p:selectBooleanCheckbox value="#{persona.renit.registrado}" />
+                                    </p:column>
+
+                                    <p:column headerText="Realizado curso" width="100">
+                                        <p:selectBooleanCheckbox value="#{persona.renit.realizoCurso}" />
+                                    </p:column>
+
+
+                                    <p:column headerText="Modalidades" width="300">
+                                        <p:outputLabel value="#{personaManagedBean.descripcionCertificados(persona)}"/>
+                                    </p:column>
+
+                                    <p:column headerText="Correo Confirmado" width="150">
+                                        <p:inputSwitch value="#{persona.correoConfirmado}"/>
+                                    </p:column>
+
+                                    <p:column style="width:32px;text-align: center" width="100">
+                                        <p:commandButton id="eliminar" value="Eliminar" oncomplete="PF('dialogConfirm').show()" icon="ui-icon-close" title="View">
+                                            <f:setPropertyActionListener value="#{persona}" target="#{personaManagedBean.personaAEliminar}" />
+                                        </p:commandButton>
+                                    </p:column>
+                                </p:dataTable>
+
+                            </pm:content>        
+                        </p:tab>
+
+                        <p:tab title="Usuarios registrado esperando aprobación">
+
+                            <p:dataTable id="tabla" var="persona" value="#{personaManagedBean.personaWithoutUser}" 
+                                         styleClass="tabla" scrollable="true" editable="false">
+
+                                <p:column headerText="Nombres y Apellidos" width="300">
+                                    <p:outputLabel value="#{persona.nombre}" />
+                                </p:column>
+
+                                <p:column headerText="Cédula" width="150">
+                                    <p:outputLabel value="#{persona.cedula}" />
+                                </p:column>
+
+                                <p:column headerText="Confirmación Correo" width="50">
+                                    <p:inputSwitch disabled="true" value="#{persona.correoConfirmado}"/>
+                                </p:column>
+
+                                <p:column style="width:32px;text-align: center" width="50">
+                                    <p:commandButton id="buttonCheck" icon="ui-icon-check" 
+                                                     actionListener="#{personaManagedBean.aceptarUsuario(persona)}"
+                                                     update="@(.tabla .basic)"
+                                                     ajax="false"/>
+                                </p:column>
+
+                                <p:column style="width:32px;text-align: center" width="50">
+                                    <p:commandButton id="buttonClose" icon="ui-icon-close" 
+                                                     actionListener="#{personaManagedBean.eliminarUsuario(persona)}"
+                                                     update=":form:tabla"
+                                                     ajax="false"/>
+                                </p:column>
+
+                            </p:dataTable>
+
+                        </p:tab>
+
+                    </p:accordionPanel>
+
+                </p:panel>
+
+                <p:commandButton value="Buscador" action="buscador" ajax="false"/>
+
+                <p:commandButton value="Configuracion" action="constantconfig" ajax="false"/>
+
+                <p:commandButton id="buttonActualizarDatos" value="Actualizar Datos" actionListener="#{personaManagedBean.setSessionPersona(null)}" ajax="false"/>
+
+                <p:commandButton value="Correos" action="correo" ajax="false"/>
+
+                <p:commandButton id="cerrarSession" value="Cerrar sesion" action="/index?faces-redirect=true" 
+                                 actionListener="#{personaManagedBean.cerrarSecion()}" ajax="false"/>    
+
+
+                <p:dialog id="dialog" header="Certificados" modal="true" resizable="false" showEffect="fade" widgetVar="dlg">
+                    <p:dataTable id="certificados" var="rel" value="#{personaManagedBean.relModalidadRenits}" 
+                                 styleClass="tabla">
+                        <p:column headerText="Código">
+                            <p:outputLabel value="#{rel.codigo}"/>
+                        </p:column>
+                        <p:column headerText="Modalidad">
+                            <p:outputLabel value="#{rel.modalidad.descripcion}"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:dialog>
+
+                <p:dialog id="confirm" header="Esta seguro?" width="400" modal="true" resizable="false" showEffect="fade" widgetVar="dialogConfirm">
+                    <p:commandButton value="Si"
+                                     actionListener="#{personaManagedBean.eliminarUsuario(personaManagedBean.personaAEliminar)}" 
+                                     ajax="false"/>
+                    <p:commandButton value="No" onclick="PF('dialogConfirm').hide()"/>
+                </p:dialog>
+
+            </pm:page>
+        </h:form>
+    </h:body>
+</html>
+

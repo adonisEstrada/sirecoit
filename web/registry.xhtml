@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:pm="http://primefaces.org/mobile"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <f:view renderKitId="PRIMEFACES_MOBILE"/>
+    </h:head>
+    <h:body>
+        <style type="text/css">
+            body {  
+                background:url('resource/fondo_sirecoit2.png');                   
+            }
+        </style>
+        <style type="text/css">
+            .ui-page {
+                background: transparent url(resource/fondo_sirecoit2.png);
+            }
+        </style>
+
+        <center>
+
+            <h:form>
+
+                <pm:page>
+                    <p:outputLabel for="nombre" value="Nombre completo"/>
+                    <p:inputText id="nombre" value="#{personaManagedBean.persona.nombre}"/>
+
+                    <p:outputLabel for="cedula" value="Cedula"/>
+                    <p:inputNumber id="cedula" value="#{personaManagedBean.persona.cedula}" decimalPlaces="0"/>
+
+                    <p:outputLabel for="correo" value="Correo"/>
+                    <p:inputText id="correo" value="#{personaManagedBean.persona.correo}"/>
+
+                    <p:outputLabel for="usuario" value="usuario"/>
+                    <p:inputText id="usuario" value="#{personaManagedBean.usuario.nombre}"/>
+
+                    <p:outputLabel for="clave" value="clave"/>
+                    <p:inputText id="clave" value="#{personaManagedBean.clave}" type="password"/>
+
+                    <p:outputLabel for="confirmClave" value="confirme clave"/>
+                    <p:inputText id="confirmClave" value="#{personaManagedBean.confirmarClave}" type="password"/>
+
+
+                    <p:commandButton value="Registrar" actionListener="#{personaManagedBean.confirmar()}" 
+                                     ajax="false" icon="ui-icon-check" update="label" action="#{personaManagedBean.registrado()}"/>
+
+                    <p:outputLabel id="label" value="#{personaManagedBean.mensaje}"/>
+
+                    <pm:footer>
+
+                        <p:outputLabel value="Tiene problemas para verificar su correo?"/>
+                        <p:commandButton value="Verificar" action="resolvecorreo"/>
+
+                    </pm:footer>
+
+                </pm:page>
+
+            </h:form>
+
+        </center>
+
+    </h:body>
+
+</html>
+

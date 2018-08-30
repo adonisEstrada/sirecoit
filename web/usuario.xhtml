@@ -1,0 +1,343 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:pm="http://primefaces.org/mobile">
+    <h:head>
+        <title>Facelet Title</title>
+        <f:event type="preRenderView" listener="#{usuarioManagedBean.construir()}"/>
+        <f:view renderKitId="PRIMEFACES_MOBILE"/>
+    </h:head>
+    <h:body>
+        <style type="text/css">
+            body {  
+                background:url('resource/fondo_sirecoit2.png');                   
+            }
+        </style>
+        <style type="text/css">
+            .ui-page {
+                background: transparent url(resource/fondo_sirecoit2.png);
+            }
+        </style>
+
+        <h:form id="form">
+            <div class="iu_fluid">
+                <pm:page title="Actualizar datos">
+
+
+
+                    <p:accordionPanel>
+                        <p:tab title="Datos Personales">
+
+
+
+
+
+
+                            <pm:content>
+                                <h3>Datos Personales</h3>
+                                <pm:field>
+
+                                    <p:outputLabel for="nombreApellido" value="Nombres y Apellidos completos:" />
+                                    <p:inputText id="nombreApellido" value="#{usuarioManagedBean.persona.nombre}"/>
+
+                                    <p:outputLabel for="cedula" value="Cédula de Identidad:"/>
+                                    <p:inputText id="cedula" value="#{usuarioManagedBean.persona.cedula}" type="number"/>
+
+                                    <p:outputLabel for="rif" value="RIF (Ejemplo:V123456789):" />
+                                    <p:inputMask id="rif" value="#{usuarioManagedBean.persona.rif}" mask="V999999999"/>
+
+                                    <p:outputLabel for="correo" value="Correo Electrónico:"/>
+                                    <p:panelGrid columns="2">
+                                        <p:inputText id="correo" value="#{usuarioManagedBean.persona.correo}"/>
+                                        <p:commandButton value="Verificar" action="resolvecorreo" />
+                                        <p:outputLabel value="Debe verificar el correo!." 
+                                                       style="font-size: xx-large; color: red"
+                                                       rendered="#{!usuarioManagedBean.persona.correoConfirmado}"/>
+                                    </p:panelGrid>
+
+                                    <p:outputLabel for="fechaNacimiento" value="Fecha de Nacimiento:" />
+                                    <p:calendar id="fechaNacimiento" value="#{usuarioManagedBean.persona.fechaNacimiento}" 
+                                                locale="es" navigator="true" pattern="dd/MM/yyyy"/>
+
+                                    <p:outputLabel for="direccionResidencia" value="Dirección de Residencia:"/>
+                                    <p:inputTextarea id="direccionResidencia" value="#{usuarioManagedBean.persona.direccionHabitacion}"/>
+
+                                    <p:outputLabel for="parroquiaResidencia" value="Parroquia donde reside:"/>
+                                    <p:inputText id="parroquiaResidencia" value="#{usuarioManagedBean.persona.parroquia}"/>
+
+                                    <p:outputLabel for="municipioResidencia" value="Municipio donde reside:"/>
+                                    <p:inputText id="municipioResidencia" value="#{usuarioManagedBean.persona.municipio}"/>
+
+                                    <p:outputLabel for="estadoResidencia" value="Estado donde reside:"/>
+                                    <p:inputText id="estadoResidencia" value="#{usuarioManagedBean.persona.estado}"/>
+
+                                    <p:outputLabel for="nacionalidad" value="Nacionalidad:"/>
+                                    <p:inputText id="nacionalidad" value="#{usuarioManagedBean.persona.nacionalidad}"/>
+
+                                    <p:outputLabel for="lugarNacimiento" value="Lugar de Nacimiento:"/>
+                                    <p:inputText id="lugarNacimiento" value="#{usuarioManagedBean.persona.lugarNacimiento}"/>
+
+                                    <p:outputLabel for="cantv" value="Teléfono CANTV (Ejemplo:0212-1234567):"/>
+                                    <p:inputMask id="cantv" value="#{usuarioManagedBean.persona.telefonoCantv}" mask="9999-9999999"/>
+
+                                    <p:outputLabel for="telefonoFamiliar" value="Teléfono familiar (Ejemplo:0414-1234567):"/>
+                                    <p:inputMask id="telefonoFamiliar" value="#{usuarioManagedBean.persona.telefonoFamiliar}" mask="9999-999999"/>
+
+                                    <p:outputLabel for="telefonoPersonal" value="Teléfono personal (Ejemplo:0414-1234567):"/>
+                                    <p:inputMask id="telefonoPersonal" value="#{usuarioManagedBean.persona.telefonoPersonal}" mask="9999-999999"/>
+
+                                </pm:field>
+
+                                <p:commandButton value="Aplicar cambios" 
+                                                 actionListener="#{usuarioManagedBean.guardarPersona()}"
+                                                 ajax="false" style="background-color: aquamarine"/>
+
+                            </pm:content>
+
+
+
+
+
+
+
+
+                        </p:tab>
+                        <p:tab title="Datos Laborales">
+
+
+
+                            <pm:content style="background-color: transparent">
+                                <h3>Datos Laborales</h3>
+
+                                <pm:field>
+
+                                    <p:outputLabel for="empresa" value="Empresa o Institución donde trabaja:"/>
+                                    <p:inputText id="empresa" value="#{usuarioManagedBean.trabajo.empresa}"/>
+
+                                    <p:outputLabel for="direccionTrabajo" value="Dirección de trabajo:"/>
+                                    <p:inputText id="direccionTrabajo" value="#{usuarioManagedBean.trabajo.lugarEmpresa}"/>
+
+                                    <p:outputLabel for="parroquiaTrabajo" value="Parroquia donde trabaja:"/>
+                                    <p:inputText id="parroquiaTrabajo" value="#{usuarioManagedBean.trabajo.parroquiaTrabajo}"/>
+
+                                    <p:outputLabel for="municipioTrabajo" value="Municipio donde trabaja:"/>
+                                    <p:inputText id="municipioTrabajo" value="#{usuarioManagedBean.trabajo.municipioTrabajo}"/>
+
+                                    <p:outputLabel for="estadoTrabajo" value="Estado donde trabaja:"/>
+                                    <p:inputText id="estadoTrabajo" value="#{usuarioManagedBean.trabajo.estadoTrabajo}"/>
+
+                                    <p:outputLabel for="cargo" value="Cargo actual:"/>
+                                    <p:inputText id="cargo" value="#{usuarioManagedBean.trabajo.cargo}"/>
+
+                                    <p:outputLabel for="profesion" value="Profesión:"/>
+                                    <p:inputText id="profesion" value="#{usuarioManagedBean.trabajo.profesion}"/>
+
+                                </pm:field>
+
+                                <p:outputLabel for="gradoInstruccion" value="Grado de instrucción:"/>
+                                <p:selectOneMenu id="gradoInstruccion" value="#{usuarioManagedBean.trabajo.gradoInstruccion}">
+                                    <f:selectItem itemLabel="Básica" itemValue="Básica" />
+                                    <f:selectItem itemLabel="Bachiller" itemValue="Bachiller" />
+                                    <f:selectItem itemLabel="Licenciatura/Ingeniería" itemValue="Licenciatura/Ingeniería" />
+                                    <f:selectItem itemLabel="Especialización" itemValue="Especialización" />
+                                    <f:selectItem itemLabel="Maestría" itemValue="Maestría" />
+                                    <f:selectItem itemLabel="Doctorado" itemValue="Doctorado" />
+                                </p:selectOneMenu>
+                                <br/>
+                                <p:commandButton value="Aplicar cambios" 
+                                                 actionListener="#{usuarioManagedBean.guardarTrabajo()}"
+                                                 ajax="false" style="background-color: aquamarine"/>
+                            </pm:content>
+
+
+
+
+                        </p:tab>
+                        <p:tab title="Datos FEVETI">
+
+
+
+
+                            <pm:content style="background-color: transparent">
+
+                                <h3>Datos FEVETI</h3>
+
+                                <pm:field>
+                                    <p:outputLabel for="miembroFeveti" value="Es miembro FEVETI?:"/>
+                                    <p:inputSwitch id="miembroFeveti" value="#{usuarioManagedBean.feveti.miembro}" />
+
+                                    <p:outputLabel for="asociacion" value="Asociación a la que pertenece:"/>
+                                    <p:inputText id="asociacion" value="#{usuarioManagedBean.feveti.asociacion}"/>
+
+                                    <p:outputLabel for="fechaFeveti" value="Fecha de ingreso:"/>
+                                    <p:calendar id="fechaFeveti" value="#{usuarioManagedBean.feveti.fechaIngreso}" 
+                                                locale="es" navigator="true" pattern="dd/MM/yyyy"/>
+
+                                </pm:field>
+
+                                <p:commandButton value="Aplicar cambios" actionListener="#{usuarioManagedBean.guardarFeveti()}"
+                                                 ajax="false" style="background-color: aquamarine"/>
+                            </pm:content>
+
+
+
+
+
+                        </p:tab>
+
+                        <p:tab title="Datos RENIT">
+
+                            <pm:content style="background-color: transparent">
+
+                                <h3>Datos RENIT</h3>
+
+                                <pm:field>
+
+                                    <p:outputLabel for="registradoRenit" value="Registrado en el RENIT?:"/>
+                                    <p:inputSwitch id="registradoRenit" value="#{usuarioManagedBean.renit.registrado}" />
+
+                                    <p:outputLabel value="Número de Certificación RENIT:"/>
+                                    <p:inputText value="#{usuarioManagedBean.renit.numeroCertificacion}"/>
+
+                                    <p:outputLabel value="Fecha de Vencimiento:"/>
+                                    <p:calendar value="#{usuarioManagedBean.renit.fechaVencimiento}" 
+                                                locale="es" navigator="true" pattern="dd/MM/yyyy"/>
+
+                                    <p:outputLabel for="realizoCurso" value="Realizó curso 26/05/2016?:"/>
+                                    <p:inputSwitch id="realizoCurso" value="#{usuarioManagedBean.renit.realizoCurso}" />
+
+
+                                </pm:field>    
+
+                                <p:commandButton value="Aplicar cambios" actionListener="#{usuarioManagedBean.guardarRenit()}" 
+                                                 ajax="false" style="background-color: aquamarine"/>
+
+                                <p:dataTable id="modalidadTabla" var="modalidad" value="#{usuarioManagedBean.modalidades}" 
+                                             styleClass="modalidadTablaClass" 
+                                             scrollable="true">
+
+                                    <p:column headerText="Modalidad Autorizada" width="200">
+                                        <p:outputLabel value="#{modalidad.descripcion}"/>
+                                    </p:column>
+
+                                    <p:column width="200">
+                                        <p:commandButton value="Seleccionar" title="Seleccionar" update="@(.labelModalidad)">
+                                            <f:setPropertyActionListener value="#{modalidad}" target="#{usuarioManagedBean.modalidad}" />
+                                        </p:commandButton>
+                                    </p:column>
+
+                                </p:dataTable>
+
+                                <p:outputLabel id="labelModalidad" styleClass="labelModalidad" value="Modalidad seleccionada: #{usuarioManagedBean.modalidad.descripcion}"/>
+                                <p:commandButton value="Agregar" actionListener="#{usuarioManagedBean.guardarRelModalidadRenit()}"
+                                                 update="@(.tabla)" ajax="false"/>
+
+                                <p:dataTable id="tabla" var="rel" value="#{usuarioManagedBean.relModalidadRenits}" 
+                                             styleClass="tabla">
+                                    <p:column headerText="Modalidad">
+                                        <h:outputText value="#{rel.modalidad.descripcion}" />
+                                    </p:column>
+                                    <p:column headerText="Código">
+                                        <h:outputText value="#{rel.codigo}" />
+                                    </p:column>
+                                    <p:column style="width:32px;text-align: center">
+                                        <p:commandButton id="eliminar" value="Eliminar" oncomplete="PF('dialogConfirm').show()" icon="ui-icon-close" title="View">
+                                            <f:setPropertyActionListener value="#{rel}" target="#{usuarioManagedBean.relAEliminar}" />
+                                        </p:commandButton>
+                                    </p:column>
+                                </p:dataTable>
+                            </pm:content>
+                        </p:tab>
+                        <p:tab title="Datos Datos de permiso DAEX de su arma principal">
+
+
+
+
+
+                            <pm:content style="background-color: transparent" >
+                                <h3>Datos de permiso DAEX de su arma principal</h3>
+
+                                <pm:field>
+
+                                    <p:outputLabel value="Tipo de arma"/>
+                                    <p:inputText value="#{usuarioManagedBean.arma.tipoArma}"/>
+
+                                    <p:outputLabel value="Marca"/>
+                                    <p:inputText value="#{usuarioManagedBean.arma.marca}"/>
+
+                                    <p:outputLabel value="Modelo"/>
+                                    <p:inputText value="#{usuarioManagedBean.arma.modelo}"/>
+
+                                    <p:outputLabel value="Calibre"/>
+                                    <p:inputText value="#{usuarioManagedBean.arma.calibre}"/>
+
+                                    <p:outputLabel value="Serial"/>
+                                    <p:inputText value="#{usuarioManagedBean.arma.serial}"/>
+
+                                    <p:outputLabel value="Pais de fabricación"/>
+                                    <p:inputText value="#{usuarioManagedBean.arma.paisFabricacion}"/>
+
+                                    <p:outputLabel value="Capacidad cartuchos"/>
+                                    <p:inputText value="#{usuarioManagedBean.arma.capacidadCartucho}" type="number"/>
+
+                                    <p:outputLabel value="Numero de factura"/>
+                                    <p:inputText value="#{usuarioManagedBean.arma.numeroFactura}"/>
+
+                                    <p:outputLabel value="Fecha factura"/>
+                                    <p:calendar value="#{usuarioManagedBean.arma.fechaFactura}" 
+                                                locale="es" navigator="true" pattern="dd/MM/yyyy"/>
+
+                                    <p:outputLabel value="Tipo de porte"/>
+                                    <p:inputText value="#{usuarioManagedBean.arma.tipoPorte}"/>
+
+                                    <p:outputLabel value="Codigo DAEX numero de porte"/>
+                                    <p:inputText value="#{usuarioManagedBean.arma.codigoDaexNumeroPorte}"/>
+
+                                    <p:outputLabel value="Numero de sobre"/>
+                                    <p:inputText value="#{usuarioManagedBean.arma.numeroSobre}"/>
+
+                                    <p:outputLabel value="Fecha vencimiento"/>
+                                    <p:calendar value="#{usuarioManagedBean.arma.fechaVencimiento}" 
+                                                locale="es" navigator="true" pattern="dd/MM/yyyy"/>
+
+                                    <p:outputLabel value="Porte vigente?"/>
+                                    <p:inputSwitch value="#{usuarioManagedBean.arma.porteVigente}" />
+
+                                </pm:field>    
+
+                                <p:commandButton value="Aplicar cambios" actionListener="#{usuarioManagedBean.guardarArma()}" 
+                                                 ajax="false" style="background-color: aquamarine"/>
+
+
+                            </pm:content> 
+
+
+
+
+
+                        </p:tab>
+                    </p:accordionPanel>
+
+                    <p:commandButton value="Volver al menu" rendered="#{usuarioManagedBean.usuarioNormal()}"
+                                     action="#{usuarioManagedBean.volver()}" ajax="false"/>
+
+                    <p:commandButton value="Cerrar sesión" action="/index?faces-redirect=true"
+                                     actionListener="#{usuarioManagedBean.cerrarSesion()}"/>
+
+                </pm:page>
+            </div>
+            <p:dialog id="confirm" header="Esta seguro?" width="400" modal="true" resizable="false" showEffect="fade" widgetVar="dialogConfirm">
+                <p:commandButton value="Si"
+                                 actionListener="#{usuarioManagedBean.eliminarRelModalidadRenit()}" 
+                                 ajax="false"/>
+                <p:commandButton value="No" onclick="PF('dialogConfirm').hide()" />
+            </p:dialog>
+        </h:form>
+
+    </h:body>
+</html>
+
+
