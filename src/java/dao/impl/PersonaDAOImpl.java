@@ -26,7 +26,12 @@ public class PersonaDAOImpl extends GenericDAOImpl<Persona> implements PersonaDA
         transaction = session.beginTransaction();
         Query query = session.createQuery("select distinct persona from Persona persona "
                 + "inner join fetch persona.usuario usuario "
+                + "left join fetch persona.trabajo trabajo "
+                + "left join fetch persona.arma arma "
+                + "left join fetch persona.feveti feveti "
                 + "left join fetch persona.renit renit "
+                + "left join fetch renit.relModalidadRenits rel "
+                + "left join fetch rel.modalidad modalidad "
                 + "where persona.cedula=:cedula and "
                 + "usuario.activo=true ");
         query.setParameter("cedula", cedula);

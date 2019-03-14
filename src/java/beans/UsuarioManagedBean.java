@@ -5,6 +5,7 @@
  */
 package beans;
 
+import com.mchange.io.FileUtils;
 import dto.Arma;
 import dto.Feveti;
 import dto.Modalidad;
@@ -13,19 +14,25 @@ import dto.RelModalidadRenit;
 import dto.Renit;
 import dto.Trabajo;
 import dto.Usuario;
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
+import java.net.URI;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.event.PhaseId;
 import javax.servlet.http.HttpServletResponse;
 import org.primefaces.model.DefaultStreamedContent;
 import org.primefaces.model.StreamedContent;
@@ -36,38 +43,58 @@ import util.Fecha;
  * @author Adonis
  */
 @ManagedBean
-@ViewScoped
-public class UsuarioManagedBean implements Serializable{
+@RequestScoped
+public class UsuarioManagedBean implements Serializable {
 
-    ServiceBean serviceBean = new ServiceBean();
+    private ServiceBean serviceBean = new ServiceBean();
 
-    Usuario usuario;
+    private Usuario usuario;
 
-    RelModalidadRenit relAEliminar;
+    private RelModalidadRenit relAEliminar;
 
-    Persona persona;
-    Feveti feveti;
-    Renit renit;
-    Trabajo trabajo;
-    Arma arma;
+    private Persona persona;
+    private Feveti feveti;
+    private Renit renit;
+    private Trabajo trabajo;
+    private Arma arma;
 
-    Fecha fechaArmaVencimiento = new Fecha(),
+    private Fecha fechaArmaVencimiento = new Fecha(),
             fechaPersonaNacimiento = new Fecha(),
             fechaRenit = new Fecha(),
             fechaFeveti = new Fecha(),
             fechaArmaFactura = new Fecha();
 
-    String name = "";
-    String pass = "";
-    String mensaje = "";
+    private String name = "";
+    private String pass = "";
+    private String mensaje = "";
 
-    String codigoRenit = "";
+    private String codigoRenit = "";
 
-    List<Modalidad> modalidades = serviceBean.getModalidad();
+    private List<Modalidad> modalidades = serviceBean.getModalidad();
 
-    Modalidad modalidad;
+    private Modalidad modalidad;
 
-    List<RelModalidadRenit> relModalidadRenits;
+    private List<RelModalidadRenit> relModalidadRenits;
+
+    private StreamedContent imagen;
+
+    @PostConstruct
+    public void init() {
+//        Usuario usuarioIniciado = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
+        construir();
+        if (usuario != null) {
+            Persona personaIniciada = serviceBean.getPersonByUser(usuario);
+            imagen = new DefaultStreamedContent(new ByteArrayInputStream(personaIniciada.getImagen()));
+        }
+    }
+
+    public StreamedContent getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(StreamedContent imagen) {
+        this.imagen = imagen;
+    }
 
     public RelModalidadRenit getRelAEliminar() {
         return relAEliminar;
@@ -359,34 +386,37 @@ public class UsuarioManagedBean implements Serializable{
         }
     }
 
-//    public void verImagen() {
-//        if (usuario != null
-//                && persona != null
-//                && persona.getImagen() != null
-//                && persona.getImagen().length > 1) {
-//            HttpServletResponse response
-//                    = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
-//            try {
-//                response.getOutputStream().write(persona.getImagen());
-//                response.getOutputStream().close();
-//                FacesContext.getCurrentInstance().responseComplete();
-//            } catch (IOException ex) {
-//                ex.printStackTrace();
-//            }
-//        }
-//    }
+    public void verImagen() {
+        if (usuario != null
+                && persona != null
+                && persona.getImagen() != null
+                && persona.getImagen().length > 1) {
+            HttpServletResponse response
+                    = (HttpServletResponse) FacesContext.getCurrentInstance().getExternalContext().getResponse();
+            try {
+                response.getOutputStream().write(persona.getImagen());
+                response.getOutputStream().close();
+                FacesContext.getCurrentInstance().responseComplete();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
     public void construir() {
         Persona sessionPersona = (Persona) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("persona");
+        usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
         if (sessionPersona != null) {
             usuario = serviceBean.getUsuario(sessionPersona.getUsuario().getNombre(), sessionPersona.getUsuario().getClave());
             persona = serviceBean.getPersonByUser(usuario);
-        } else {
+        } else if (usuario != null) {
             usuario = (Usuario) FacesContext.getCurrentInstance().getExternalContext().getSessionMap().get("usuario");
             persona = serviceBean.getPersonByUser(usuario);
         }
     }
-    public void validate(){
+
+    public void validate() {
         serviceBean.validate();
     }
-    
+
 }

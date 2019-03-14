@@ -30,15 +30,15 @@ public class Persona implements java.io.Serializable {
     private Usuario usuario;
     private String correoConfirmacionId;
     private boolean correoConfirmado;
-//    private byte[] imagen;
+    private byte[] imagen;
 
-//    public byte[] getImagen() {
-//        return imagen;
-//    }
-//
-//    public void setImagen(byte[] imagen) {
-//        this.imagen = imagen;
-//    }
+    public byte[] getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(byte[] imagen) {
+        this.imagen = imagen;
+    }
 
     public String getCorreoConfirmacionId() {
         return correoConfirmacionId;

@@ -10,6 +10,7 @@
         <title>Administrador SIRECOIT</title>
         <f:event type="preRenderView" listener="#{personaManagedBean.construir()}"/>
         <f:event type="preRenderView" listener="#{personaManagedBean.validate()}"/>
+        <f:view renderKitId="PRIMEFACES_MOBILE"/>
     </h:head>
     <h:body>
         <style type="text/css">
@@ -129,11 +130,11 @@
 
                                 <p:dataTable var="persona" value="#{personaManagedBean.personasWithUser}" 
                                              scrollable="true" editable="true" editMode="cell" styleClass="tablaPersonasNoCertificadas">
-                                    
+
                                     <p:column style="width:32px;text-align: center" width="100">
                                         <p:commandButton id="ver" value="Ver" icon="ui-icon-find" title="View" actionListener="#{personaManagedBean.setSessionPersona(persona)}"/>
                                     </p:column>
-                                    
+
                                     <p:column headerText="Nombres y Apellidos" width="300" 
                                               filterBy="#{persona.nombre}" 
                                               filterMatchMode="contains">
@@ -256,6 +257,8 @@
 
                 </p:panel>
 
+                <p:commandButton value="Reporte" action="reporte" ajax="false"/>
+
                 <p:commandButton value="Buscador" action="buscador" ajax="false"/>
 
                 <p:commandButton value="Configuracion" action="constantconfig" ajax="false"/>
@@ -266,7 +269,6 @@
 
                 <p:commandButton id="cerrarSession" value="Cerrar sesion" action="/index?faces-redirect=true" 
                                  actionListener="#{personaManagedBean.cerrarSecion()}" ajax="false"/>    
-
 
                 <p:dialog id="dialog" header="Certificados" modal="true" resizable="false" showEffect="fade" widgetVar="dlg">
                     <p:dataTable id="certificados" var="rel" value="#{personaManagedBean.relModalidadRenits}" 

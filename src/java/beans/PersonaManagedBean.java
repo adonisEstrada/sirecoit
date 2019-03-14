@@ -302,7 +302,7 @@ public class PersonaManagedBean implements Serializable {
         return "";
     }
 
-    public void aplicarCambios() {
+//    public void aplicarCambios() {
 //        List<Feveti> listaFeveti = new ArrayList<Feveti>();
 //        List<Renit> listaRenit = new ArrayList<Renit>();
 //        List<Trabajo> listaTrabajo = new ArrayList<Trabajo>();
@@ -325,7 +325,7 @@ public class PersonaManagedBean implements Serializable {
 //        for (Trabajo trabajo : listaTrabajo) {
 //            serviceBean.saveTrabajo(trabajo);
 //        }
-    }
+//    }
 
 //    public void aplicarCambiosUsuariosCertificados() {
 //        List<Feveti> listaFeveti = new ArrayList<Feveti>();

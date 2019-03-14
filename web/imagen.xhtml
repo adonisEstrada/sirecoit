@@ -2,18 +2,28 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
+        <f:view renderKitId="PRIMEFACES_MOBILE"/>
     </h:head>
     <h:body>
         <h:form id="form" enctype="multipart/form-data">
-            <p:growl showDetail="true"/>
             <p:panel header="Cargar tu imagen">
+
                 <p:outputLabel value="#{imagenManagedBean.obtenerNombre()}"/>
-                <p:fileUpload value="#{imagenManagedBean.uploadedFile}" mode="simple"/>
-                <p:commandButton value="subir" actionListener="#{imagenManagedBean.guardarImagen()}" ajax="false"/>
+                <p:fileUpload value="#{imagenManagedBean.uploadedFile}" mode="simple"
+                              id="fileUpload"
+                              allowTypes="/(\.|\/)(gif|jpe?g|png)$/"/>
+                <p:commandButton value="Subir" actionListener="#{imagenManagedBean.guardarImagen()}" 
+                                 update="fileUpload" ajax="false" />
+                <p:commandButton value="Volver" action="usuario"/>
+
+                <p:outputLabel value="#{imagenManagedBean.mensaje}" style="color: crimson"/>
+
             </p:panel>
+
         </h:form>
     </h:body>
 </html>

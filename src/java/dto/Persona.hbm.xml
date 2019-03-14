@@ -56,9 +56,9 @@
         <property name="correoConfirmado" type="java.lang.Boolean">
             <column name="correo_confirmado" />
         </property>
-<!--        <property name="imagen" type="binary">
+        <property name="imagen" type="binary">
             <column name="imagen" />
-        </property>-->
+        </property>
         <one-to-one name="trabajo" class="dto.Trabajo"></one-to-one>
         <one-to-one name="arma" class="dto.Arma"></one-to-one>
         <one-to-one name="feveti" class="dto.Feveti"></one-to-one>

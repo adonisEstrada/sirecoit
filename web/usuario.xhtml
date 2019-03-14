@@ -7,7 +7,7 @@
       xmlns:pm="http://primefaces.org/mobile">
     <h:head>
         <title>Facelet Title</title>
-        <f:event type="preRenderView" listener="#{usuarioManagedBean.construir()}"/>
+        <f:event type="preRenderView" listener="#{usuarioManagedBean.validate()}"/>
         <f:view renderKitId="PRIMEFACES_MOBILE"/>
     </h:head>
     <h:body>
@@ -34,11 +34,17 @@
 
 
 
-
-
                             <pm:content>
                                 <h3>Datos Personales</h3>
                                 <pm:field>
+                                    <center>
+                                        <p:graphicImage value="#{usuarioManagedBean.imagen}" width="300" cache="false"/>
+                                    </center>
+
+                                    <p:commandButton value="Subir imagen" action="imagen"/>
+                                    <p:commandButton value="Ver imagen" 
+                                                     actionListener="#{usuarioManagedBean.verImagen()}"
+                                                     ajax="false"/>
 
                                     <p:outputLabel for="nombreApellido" value="Nombres y Apellidos completos:" />
                                     <p:inputText id="nombreApellido" value="#{usuarioManagedBean.persona.nombre}"/>

@@ -1,0 +1,234 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="sirecoit_datos_persona_report" pageWidth="612" pageHeight="792" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="66450498-e751-4ca5-aa62-8e4a7f0216bb">
+	<parameter name="IMAGE" class="java.lang.String"/>
+	<parameter name="IMAGE_PERSONA" class="java.lang.String"/>
+	<parameter name="RENIT" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="cedula" class="java.lang.Integer">
+		<fieldDescription><![CDATA[cedula]]></fieldDescription>
+	</field>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[nombre]]></fieldDescription>
+	</field>
+	<field name="rif" class="java.lang.String">
+		<fieldDescription><![CDATA[rif]]></fieldDescription>
+	</field>
+	<field name="fechaNacimiento" class="java.util.Date">
+		<fieldDescription><![CDATA[fechaNacimiento]]></fieldDescription>
+	</field>
+	<field name="lugarNacimiento" class="java.lang.String">
+		<fieldDescription><![CDATA[lugarNacimiento]]></fieldDescription>
+	</field>
+	<field name="nacionalidad" class="java.lang.String">
+		<fieldDescription><![CDATA[nacionalidad]]></fieldDescription>
+	</field>
+	<field name="direccionHabitacion" class="java.lang.String">
+		<fieldDescription><![CDATA[direccionHabitacion]]></fieldDescription>
+	</field>
+	<field name="parroquia" class="java.lang.String">
+		<fieldDescription><![CDATA[parroquia]]></fieldDescription>
+	</field>
+	<field name="municipio" class="java.lang.String">
+		<fieldDescription><![CDATA[municipio]]></fieldDescription>
+	</field>
+	<field name="telefonoCantv" class="java.lang.String">
+		<fieldDescription><![CDATA[telefonoCantv]]></fieldDescription>
+	</field>
+	<field name="telefonoPersonal" class="java.lang.String">
+		<fieldDescription><![CDATA[telefonoPersonal]]></fieldDescription>
+	</field>
+	<field name="telefonoFamiliar" class="java.lang.String">
+		<fieldDescription><![CDATA[telefonoFamiliar]]></fieldDescription>
+	</field>
+	<field name="correo" class="java.lang.String">
+		<fieldDescription><![CDATA[correo]]></fieldDescription>
+	</field>
+	<field name="trabajo" class="dto.Trabajo">
+		<fieldDescription><![CDATA[trabajo]]></fieldDescription>
+	</field>
+	<field name="arma" class="dto.Arma">
+		<fieldDescription><![CDATA[arma]]></fieldDescription>
+	</field>
+	<field name="feveti" class="dto.Feveti">
+		<fieldDescription><![CDATA[feveti]]></fieldDescription>
+	</field>
+	<field name="renit" class="dto.Renit">
+		<fieldDescription><![CDATA[renit]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="170" splitType="Stretch">
+			<image isLazy="true" onErrorType="Blank">
+				<reportElement x="0" y="0" width="280" height="80" uuid="247bfd7e-cfff-4da3-bea2-b2d4c7a17e9b"/>
+				<imageExpression><![CDATA[$P{IMAGE}]]></imageExpression>
+			</image>
+			<image onErrorType="Blank">
+				<reportElement x="428" y="0" width="142" height="170" uuid="abe9b433-1181-49b4-9ea8-29f3d5c4a78d"/>
+				<imageExpression><![CDATA[$P{IMAGE_PERSONA}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<detail>
+		<band height="151">
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="5" y="42" width="280" height="12" uuid="80c98477-f121-40e9-bf34-70eb79b9ee3a"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement markup="html"/>
+				<textFieldExpression><![CDATA["<b>Nombre: </b>"+$F{nombre}+"<br/>"+
+"<b>Cédula: </b>"+$F{cedula}+"<br/>"+
+"<b>Fecha nacimiento: </b>"+ new SimpleDateFormat("dd/MM/yyyy").format($F{fechaNacimiento})+"<br/>"+
+"<b>RIF: </b>"+$F{rif}+"<br/>"+
+"<b>Nacionalidad: </b>"+$F{nacionalidad}+"<br/>"+
+"<b>Municipio: </b>"+$F{municipio}+"<br/>"+
+"<b>Parroquia: </b>"+$F{parroquia}+"<br/>"+
+"<b>Teléfono CANTV: </b>"+$F{telefonoCantv}+"<br/>"+
+"<b>Teléfono Familiar: </b>"+$F{telefonoFamiliar}+"<br/>"+
+"<b>Teléfono Personal: </b>"+$F{telefonoPersonal}+"<br/>"+
+"<b>Dirección: </b>"+$F{direccionHabitacion}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="5" y="12" width="280" height="30" uuid="a7910a46-822a-44ec-9417-28e119c8a0a2"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datos Personales]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="296" y="12" width="279" height="30" uuid="12153876-d760-49ab-82ec-f2f35943f0a7"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datos Laborales]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="296" y="42" width="279" height="12" uuid="7591f684-bb0a-4697-888d-5bf8c4e95ad8"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Left" verticalAlignment="Middle" markup="html"/>
+				<textFieldExpression><![CDATA["<b>Empresa: </b>"+$F{trabajo}.getEmpresa() + "<br/>"+
+ "<b>Lugar de la Empresa: </b>"+$F{trabajo}.getLugarEmpresa()+"<br/>"+
+"<b>Estado: </b>"+$F{trabajo}.getEstadoTrabajo()+"<br/>"+
+"<b>Municipio: </b>"+$F{trabajo}.getMunicipioTrabajo()+"<br/>"+
+"<b>Parroquia: </b>"+$F{trabajo}.getParroquiaTrabajo()+"<br/>"+
+"<b>Cargo: </b>"+$F{trabajo}.getCargo()+"<br/>"+
+"<b>Profesión: </b>"+$F{trabajo}.getProfesion()+"<br/>"+
+"<b>Grado de Instrucción: </b>"+$F{trabajo}.getGradoInstruccion()+""]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="296" y="90" width="279" height="12" uuid="1812947c-9102-4894-ad14-42ab945a08e3"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement markup="html"/>
+				<textFieldExpression><![CDATA["<b>Membresía: </b>"+($F{feveti}.getMiembro() ? "SÍ" : "NO")+"<br/>"+
+"<b>Asociación: </b>"+$F{feveti}.getAsociacion()+"<br/>"+
+"<b>Fecha de Ingreso: </b>"+new SimpleDateFormat("dd/MM/yyyy").format($F{feveti}.getFechaIngreso())]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="296" y="60" width="279" height="30" uuid="a33c512f-89f0-464d-83d1-ddff5b64fd09"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datos FEVETI]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="6" y="89" width="279" height="12" uuid="aa40af85-5514-4217-869d-5c5f97380326"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle" markup="html"/>
+				<textFieldExpression><![CDATA["<b>Tipo de Arma: </b>"+$F{arma}.getTipoArma()+"<br/>"+
+"<b>Marca: </b>"+$F{arma}.getMarca()+"<br/>"+
+"<b>Modelo: </b>"+$F{arma}.getModelo()+"<br/>"+
+"<b>Calibre: </b>"+$F{arma}.getCalibre()+"<br/>"+
+"<b>Serial: </b>"+$F{arma}.getSerial()+"<br/>"+
+"<b>Pais de Fabricación: </b>"+$F{arma}.getPaisFabricacion()+"<br/>"+
+"<b>Capacidad de Cartucho: </b>"+$F{arma}.getCapacidadCartucho()+"<br/>"+
+"<b>No. Factura: </b>"+$F{arma}.getNumeroFactura()+"<br/>"+
+"<b>Fecha de Factura: </b>"+ new SimpleDateFormat("dd/MM/yyyy").format($F{arma}.getFechaFactura())+"<br/>"+
+"<b>Tipo de Porte: </b>"+$F{arma}.getTipoPorte()+"<br/>"+
+"<b>Código: </b>"+$F{arma}.getCodigoDaexNumeroPorte()+"<br/>"+
+"<b>Numero de Sobre: </b>"+ $F{arma}.getNumeroSobre()+"<br/>"+
+"<b>Fecha de Vencimiento: </b>"+new SimpleDateFormat("dd/MM/yyyy").format($F{arma}.getFechaVencimiento())+"<br/>"+
+"<b>Vigente: </b>"+($F{arma}.getPorteVigente() ? "SÍ" : "NO")]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="6" y="59" width="279" height="30" uuid="a105660c-fcec-4971-b900-092716ced3cc"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datos del Arma]]></text>
+			</staticText>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement positionType="Float" x="297" y="139" width="279" height="12" uuid="46080b2c-bcae-43eb-891b-47eb791deedf"/>
+				<box>
+					<leftPen lineWidth="1.0"/>
+					<bottomPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement markup="html"/>
+				<textFieldExpression><![CDATA[$P{RENIT}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement positionType="Float" x="297" y="109" width="279" height="30" uuid="ed8c48aa-261d-47e9-95be-e9afad7af5eb"/>
+				<box>
+					<topPen lineWidth="1.0"/>
+					<leftPen lineWidth="1.0"/>
+					<rightPen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Datos RENIT]]></text>
+			</staticText>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="67" splitType="Stretch">
+			<textField>
+				<reportElement x="1" y="20" width="570" height="30" uuid="722ebb86-0bee-4475-9666-f5ca86f8befb"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("dd/MM/yyyy - hh:mm:ss aa").format(new Date())]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
